@@ -8,9 +8,7 @@
 #include <chrono>
 
 using namespace std;
-// #include "Graph.hpp"
-// #include "Algorithms.hpp"
-// using ariel::Algorithms;
+
 
 TEST_CASE("Test isConnected")
 {
@@ -117,8 +115,6 @@ TEST_CASE("Test isConnected with a complete graph") {
     g.loadGraph(graph);
     CHECK(ariel::Algorithms::isConnected(g) == "true");
 }
-
-// ... (other test cases remain the same)
 
 TEST_CASE("Test isBipartite with a complete graph") {
     ariel::Graph g;

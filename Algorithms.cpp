@@ -13,7 +13,7 @@ namespace ariel {
         std::vector<int> dist(numVertices, INT_MAX);
         std::vector<int> prev(numVertices, -1);
 
-        // Implement BFS directly in this function
+        //  BFS 
         std::queue<size_t> q;
         dist[0] = 0;
         q.push(0);
@@ -31,7 +31,6 @@ namespace ariel {
             }
         }
 
-        // Check if all vertices are reachable
         for (size_t i = 0; i < numVertices; ++i) {
             if (dist[i] == INT_MAX)
                 return "false";
@@ -51,7 +50,7 @@ namespace ariel {
         std::vector<int> dist(numVertices, INT_MAX);
         std::vector<int> prev(numVertices, -1);
 
-        // Implement BFS directly in this function
+        //  BFS 
         std::queue<size_t> q;
         dist[start] = 0;
         q.push(start);
@@ -70,17 +69,15 @@ namespace ariel {
         }
 
         if (dist[end] == INT_MAX) {
-            return "-1"; // No path
+            return "-1"; 
         }
 
-        // Reconstruct the path
         std::vector<int> path;
         for (int at = end; at != -1; at = prev[static_cast<size_t>(at)]) {
             path.push_back(at);
         }
         std::reverse(path.begin(), path.end());
 
-        // Format the path as a string
         std::ostringstream oss;
         for (size_t i = 0; i < path.size(); ++i) {
             oss << path[i];
@@ -97,7 +94,7 @@ namespace ariel {
         std::vector<bool> visited(n, false);
         std::vector<bool> inStack(n, false);
 
-        // Implement DFS directly in this function
+        //  DFS 
         std::function<bool(size_t)> dfs = [&](size_t u) -> bool {
             visited[u] = true;
             inStack[u] = true;
@@ -106,14 +103,14 @@ namespace ariel {
                 if (adjMatrix[u][v] != 0) {
                     if (!visited[v]) {
                         if (dfs(v)) {
-                            return true; // Cycle detected in deeper recursion
+                            return true; 
                         }
                     } else if (inStack[v]) {
-                        return true; // Cycle detected
+                        return true; 
                     }
                 }
             }
-            inStack[u] = false; // Remove the vertex from the current path
+            inStack[u] = false; 
             return false;
         };
 
@@ -151,13 +148,13 @@ namespace ariel {
             queue.pop();
 
             for (size_t neighbor = 0; neighbor < numVertices; neighbor++) {
-                if (g.getAdjMatrix()[curr][neighbor] != 0) {  // Check for any non-zero edge
+                if (g.getAdjMatrix()[curr][neighbor] != 0) {  
                     if (color[neighbor] == -1) {
                         color[neighbor] = 1 - color[curr];
                         queue.push(neighbor);
                         (color[neighbor] == 0 ? setA : setB).push_back(neighbor);
                     } else if (color[neighbor] == color[curr]) {
-                        return false; // Not bipartite
+                        return false; 
                     }
                 }
             }
@@ -168,16 +165,14 @@ namespace ariel {
     for (size_t node = 0; node < numVertices; node++) {
         if (color[node] == -1) {
             if (!bfsBipartite(node)) {
-                return "0";  // Not bipartite
+                return "0";  
             }
         }
     }
 
-    // Sort the sets for consistent output
     std::sort(setA.begin(), setA.end());
     std::sort(setB.begin(), setB.end());
 
-    // Construct the output string
     std::ostringstream oss;
     oss << "The graph is bipartite: A={";
     for (size_t i = 0; i < setA.size(); ++i) {
@@ -196,10 +191,9 @@ namespace ariel {
         const std::vector<std::vector<int>>& adjMatrix = g.getAdjMatrix();
         std::vector<int> dist(numVertices, INT_MAX);
 
-        // Implement Bellman-Ford directly in this function
+        //  Bellman Ford 
         dist[0] = 0;
 
-        // Relax edges V-1 times
         for (size_t k = 0; k < numVertices - 1; ++k) {
             for (size_t u = 0; u < numVertices; ++u) {
                 for (size_t v = 0; v < numVertices; ++v) {
@@ -211,16 +205,15 @@ namespace ariel {
             }
         }
 
-        // Check for negative-weight cycles
         for (size_t u = 0; u < numVertices; ++u) {
             for (size_t v = 0; v < numVertices; ++v) {
                 if (adjMatrix[u][v] != 0 && dist[u] != INT_MAX &&
                     dist[u] + adjMatrix[u][v] < dist[v]) {
-                    return "true"; // Negative cycle detected
+                    return "true"; 
                 }
             }
         }
 
-        return "false"; // No negative cycle
+        return "false"; 
     }
 }

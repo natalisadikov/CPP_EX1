@@ -28,7 +28,6 @@ namespace ariel {
         }
 
         if (isDirected) {
-            // Count edges again for directed graph
             numEdges = 0;
             for (size_t i = 0; i < numVertices; ++i) {
                 for (size_t j = 0; j < numVertices; ++j) {

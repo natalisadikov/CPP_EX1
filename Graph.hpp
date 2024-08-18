@@ -1,5 +1,5 @@
-// 318410941
-// michaelmorali@gmail.com
+// 206396863
+// natalisadikov2318@gmail.com
 
 #ifndef GRAPH_HPP
 #define GRAPH_HPP
